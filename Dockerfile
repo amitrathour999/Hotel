@@ -2,8 +2,8 @@ FROM php:8.2-cli
 
 # Install dependencies and PHP extensions (including SQLite)
 RUN apt-get update && apt-get install -y \
-    libpng-dev libjpeg-dev libfreetype6-dev zip unzip git sqlite3 libsqlite3-dev \
-    && docker-php-ext-install pdo pdo_mysql pdo_sqlite
+    libpng-dev libjpeg-dev libfreetype6-dev zip unzip git sqlite3 libsqlite3-dev libpq-dev \
+    && docker-php-ext-install pdo pdo_mysql pdo_sqlite pdo_pgsql
 
 WORKDIR /var/www
 
@@ -31,4 +31,4 @@ RUN sed -i 's/DB_CONNECTION=.*/DB_CONNECTION=sqlite/' .env
 
 EXPOSE 8000
 
-CMD php artisan migrate --force && php artisan db:seed --force && php artisan serve --host 0.0.0.0 --port ${PORT:-8000}
+CMD mkdir -p /var/data 2>/dev/null || true && touch /var/data/database.sqlite 2>/dev/null || true && php artisan migrate --force && php artisan db:seed --force && php artisan serve --host 0.0.0.0 --port ${PORT:-8000}
