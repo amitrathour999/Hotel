@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::table('bookings', function (Blueprint $table) {
-        //     $table->string('name')->after('room_id');
-        //     $table->string('email')->after('name');
-        //     $table->string('mobile')->after('email');
-        //     $table->integer('guests')->after('mobile');
-        //     $table->text('special_requests')->nullable()->after('guests');
-        // });
+        Schema::table('bookings', function (Blueprint $table) {
+            if (!Schema::hasColumn('bookings', 'mobile')) {
+                $table->string('mobile')->nullable()->after('email');
+            }
+        });
     }
 
     /**
@@ -25,8 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Schema::table('bookings', function (Blueprint $table) {
-        //     $table->dropColumn(['name', 'email', 'mobile', 'guests', 'special_requests']);
-        // });
+        Schema::table('bookings', function (Blueprint $table) {
+            if (Schema::hasColumn('bookings', 'mobile')) {
+                $table->dropColumn('mobile');
+            }
+        });
     }
 };

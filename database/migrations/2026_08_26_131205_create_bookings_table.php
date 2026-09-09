@@ -18,6 +18,7 @@ return new class extends Migration
             
             $table->string('name');
             $table->string('email');
+            $table->string('mobile')->nullable();
             $table->integer('guests');
             $table->text('special_requests')->nullable();
             $table->date('check_in');
