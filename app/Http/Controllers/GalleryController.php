@@ -19,7 +19,7 @@ class GalleryController extends Controller
         } catch (\Throwable $e) {
             $galleries = collect();
         }
-        return view('Backend.gallery', compact('galleries'));
+        return view('backend.gallery', compact('galleries'));
     }
 
     public function gallerycode(Request $request)

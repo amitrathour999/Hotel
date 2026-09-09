@@ -9,7 +9,7 @@ class RoomController extends Controller
 {
    public function room()
    {
-      return view('Backend.Room');
+      return view('backend.room');
    }
 
    public function roomcode(Request $request)
@@ -36,13 +36,13 @@ class RoomController extends Controller
    public function roomshow(Request $request)
    {
       $data = Room::latest()->paginate(5);
-      return view('Backend.Roomshow', compact('data'));
+      return view('backend.roomshow', compact('data'));
    }
 
    public function roomedit(Request $request, $id)
    {
       $data = Room::find($id);
-      return view('Backend.Roomedit', compact('data'));
+      return view('backend.roomedit', compact('data'));
    }
 
    public function roomupdate(Request $request, $id)

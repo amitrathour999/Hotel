@@ -13,7 +13,7 @@ class LoginController extends Controller
 {
     public function Register()
     {
-        return view('frontend.Register');
+        return view('frontend.register');
     }
 
     public function registercode(Request $request)
@@ -80,7 +80,7 @@ class LoginController extends Controller
         $totalRevenue = Payment::where('status', 'paid')->sum('amount');
         $recentBookings = Booking::with('room')->latest()->take(5)->get();
 
-        return view('Backend.dashboard', compact('totalRooms', 'availableRooms', 'totalBookings', 'totalRevenue', 'recentBookings'));
+        return view('backend.dashboard', compact('totalRooms', 'availableRooms', 'totalBookings', 'totalRevenue', 'recentBookings'));
     }
 
     public function logout()

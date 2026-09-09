@@ -26,5 +26,8 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment('production') || env('APP_ENV') === 'production') {
             URL::forceScheme('https');
         }
+
+        View::addLocation(resource_path('views/backend'));
+        View::addLocation(resource_path('views/Backend'));
     }
 }
