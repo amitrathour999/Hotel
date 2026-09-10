@@ -11,21 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table) {
-            $table->id();
+        if (!Schema::hasTable('payments')) {
+            Schema::create('payments', function (Blueprint $table) {
+                $table->id();
 
-            $table->foreignId('booking_id')->constrained('bookings')->cascadeOnDelete();
+                $table->foreignId('booking_id')->constrained('bookings')->cascadeOnDelete();
 
-            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+                $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
 
-            $table->decimal('amount', 10, 2);
-            $table->string('payment_method');
-            $table->string('status')->default('pending');
-            $table->string('transaction_id')->nullable();
-            $table->timestamp('paid_at')->nullable();
+                $table->decimal('amount', 10, 2);
+                $table->string('payment_method');
+                $table->string('status')->default('pending');
+                $table->string('transaction_id')->nullable();
+                $table->timestamp('paid_at')->nullable();
 
-            $table->timestamps();
-        });
+                $table->timestamps();
+            });
+        }
     }
 
     /**

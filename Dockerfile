@@ -31,4 +31,4 @@ RUN sed -i 's/DB_CONNECTION=.*/DB_CONNECTION=sqlite/' .env
 
 EXPOSE 8000
 
-CMD mkdir -p /var/data 2>/dev/null || true && touch /var/data/database.sqlite 2>/dev/null || true && chmod -R 777 /var/data storage bootstrap/cache database 2>/dev/null || true && php artisan migrate --force && php artisan db:seed --force && php artisan serve --host 0.0.0.0 --port ${PORT:-8000}
+CMD mkdir -p /var/data 2>/dev/null || true && touch /var/data/database.sqlite 2>/dev/null || true && chmod -R 777 /var/data storage bootstrap/cache database 2>/dev/null || true && (php artisan migrate --force || true) && (php artisan db:seed --force || true) && php artisan serve --host 0.0.0.0 --port ${PORT:-8000}

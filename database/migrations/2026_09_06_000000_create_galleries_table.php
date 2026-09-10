@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('galleries', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('category')->default('General');
-            $table->string('image');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('galleries')) {
+            Schema::create('galleries', function (Blueprint $table) {
+                $table->id();
+                $table->string('title');
+                $table->string('category')->default('General');
+                $table->string('image');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

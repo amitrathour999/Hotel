@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rooms', function (Blueprint $table) {
-            $table->id();
-            $table->integer('room_number')->unique();
-            $table->string('type',50);
-            $table->decimal('price',10,2);
-            $table->string('status',20)->default('available');
-            $table->text('description')->nullable();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('rooms')) {
+            Schema::create('rooms', function (Blueprint $table) {
+                $table->id();
+                $table->integer('room_number')->unique();
+                $table->string('type',50);
+                $table->decimal('price',10,2);
+                $table->string('status',20)->default('available');
+                $table->text('description')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

@@ -11,22 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bookings', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade');
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
-            
-            $table->string('name');
-            $table->string('email');
-            $table->string('mobile')->nullable();
-            $table->integer('guests');
-            $table->text('special_requests')->nullable();
-            $table->date('check_in');
-            $table->date('check_out');
-            $table->string('status')->default('pending');
-                         
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('bookings')) {
+            Schema::create('bookings', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade');
+                $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
+                
+                $table->string('name');
+                $table->string('email');
+                $table->string('mobile')->nullable();
+                $table->integer('guests');
+                $table->text('special_requests')->nullable();
+                $table->date('check_in');
+                $table->date('check_out');
+                $table->string('status')->default('pending');
+                             
+                $table->timestamps();
+            });
+        }
     }
 
     /**
