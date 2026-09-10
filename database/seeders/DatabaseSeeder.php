@@ -32,5 +32,20 @@ class DatabaseSeeder extends Seeder
                 'role' => 'customer',
             ]
         );
+
+        \App\Models\Room::firstOrCreate(
+            ['room_number' => '101'],
+            ['price' => 2500, 'type' => 'deluxe', 'status' => 'available', 'description' => 'Luxury Deluxe Suite with Sea View']
+        );
+
+        \App\Models\Room::firstOrCreate(
+            ['room_number' => '102'],
+            ['price' => 4000, 'type' => 'executive', 'status' => 'available', 'description' => 'Executive Suite with King Bed']
+        );
+
+        \App\Models\Room::firstOrCreate(
+            ['room_number' => '103'],
+            ['price' => 1500, 'type' => 'standard', 'status' => 'available', 'description' => 'Cozy Standard Room with Garden View']
+        );
     }
 }
